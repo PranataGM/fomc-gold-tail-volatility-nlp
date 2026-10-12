@@ -145,11 +145,12 @@ Dokumen PDF dapat diunduh langsung dari dua kanal resmi Federal Reserve berikut:
   *(Tepat pada pukul 14:30 ET, siaran dokumen pidato Ketua The Fed akan langsung muncul di baris paling atas halaman ini).*
 
 #### 4. Penempatan File
-* Unduh berkas PDF tersebut (contoh penamaan standar: `FOMCpresconf20260916.pdf`).
-* Letakkan / salin berkas PDF tersebut ke dalam folder:
+* Unduh berkas PDF tersebut (nama bawaan berkas dari The Fed bisa berupa `warshYYYYMMDDa.pdf`, `FOMCpresconfYYYYMMDD.pdf`, atau sejenisnya — **Anda TIDAK PERLU mengubah nama filenya**).
+* Cukup simpan / letakkan berkas PDF hasil unduhan langsung ke dalam folder:
   ```text
   transcript/
   ```
+  *(Program secara cerdas otomatis mendeteksi berkas PDF yang paling baru diunduh berdasarkan stempel waktu berkas).*
 
 ---
 

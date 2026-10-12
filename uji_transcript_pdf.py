@@ -74,12 +74,14 @@ def main():
         print(f"[!] Folder '{transcript_folder}' tidak ditemukan.")
         return
 
-    pdf_files = sorted([f for f in os.listdir(transcript_folder) if f.endswith('.pdf')])
+    pdf_files = [f for f in os.listdir(transcript_folder) if f.endswith('.pdf')]
     if not pdf_files:
         print(f"[!] Tidak ada file PDF di folder '{transcript_folder}'.")
         return
 
-    latest_pdf = pdf_files[-1]  # Ambil file paling baru (September 2026)
+    # Urutkan berdasarkan waktu unduh / modifikasi file terbaru
+    pdf_files.sort(key=lambda f: os.path.getmtime(os.path.join(transcript_folder, f)))
+    latest_pdf = pdf_files[-1]
     latest_pdf_path = os.path.join(transcript_folder, latest_pdf)
 
     print(f"[*] Menemukan file PDF terbaru: {latest_pdf_path}")
