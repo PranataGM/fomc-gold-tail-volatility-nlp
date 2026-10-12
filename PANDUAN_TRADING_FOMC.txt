@@ -1,0 +1,60 @@
+========================================================================================
+                  PANDUAN LENGKAP PENGGUNAAN MODEL FOMC & TRADING XAU/USD
+========================================================================================
+
+Alat Eksekusi Otomatis (1-Klik):
+1. transcript/          --> Folder tempat menyimpan dokumen PDF konferensi pers The Fed terbaru.
+2. uji_transcript_pdf.py --> Engine AI yang otomatis membaca PDF, mengekstrak pidato Ketua The Fed,
+                            menghitung Cosine Similarity & memprediksi volatilitas emas.
+3. UJI_PDF_TERBARU.bat  --> Cukup klik 2 kali file ini untuk langsung menjalankan analisis instan!
+
+----------------------------------------------------------------------------------------
+                        3 LANGKAH CARA PAKAI (SOP TRADING OTOMATIS)
+----------------------------------------------------------------------------------------
+
+LANGKAH 1: SIMPAN FILE PDF FOMC TERBARU KE FOLDER 'transcript'
+--------------------------------------------------------------
+1. Buka situs resmi Federal Reserve:
+   https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+2. Unduh PDF konferensi pers terbaru (contoh: FOMCpresconf20260916.pdf).
+3. Letakkan/simpan file PDF tersebut ke dalam folder:
+   C:\Users\User\Desktop\Trading\transcript\
+
+
+LANGKAH 2: JALANKAN PROGRAM DENGAN 1 KLIK
+-----------------------------------------
+- Klik 2 KALI (Double-Click) file: "UJI_PDF_TERBARU.bat"
+- Program secara otomatis:
+  * Mendeteksi file PDF terbaru di folder 'transcript'.
+  * Mengenali siapa Ketua The Fed yang berbicara (Powell / Warsh).
+  * Mengekstrak seluruh kalimat Ketua The Fed secara otomatis.
+  * Menghitung probabilitas volatilitas ekstrem (>= 400 Pips / $40 USD).
+
+
+LANGKAH 3: CARA BACA OUTPUT & EKSEKUSI ORDER DI METATRADER
+----------------------------------------------------------
+Program akan menampilkan salah satu dari 2 kondisi berikut di layar:
+
+KONDISI A: "STATUS: BAHAYA: POTENSI VOLATILITAS TINGGI (GERAKAN BESAR)"
+- Artinya: Pernyataan Ketua The Fed sangat mengejutkan pasar / hawkish / dovish ekstrem.
+  Emas berpotensi bergerak lebih dari 400 - 800+ Pips ($40.0 - $80.0+).
+- Yang Harus Anda Klik di MetaTrader (MT4 / MT5):
+  1. JANGAN langsung klik Buy atau Sell sekarang (berisiko tersapu ekor candle)!
+  2. Klik "New Order" --> Ubah Type menjadi "Pending Order".
+  3. Pasang Strategi STRADDLE:
+     * Pasang "Buy Stop" di sekitar 20 - 30 pips di atas harga running.
+     * Pasang "Sell Stop" di sekitar 20 - 30 pips di bawah harga running.
+     * Pasang Stop Loss yang cukup longgar (minimal 150-200 pips).
+  4. Gunakan LOT KECIL karena pergerakan harga akan sangat kencang!
+
+KONDISI B: "STATUS: AMAN: POTENSI VOLATILITAS RENDAH (PASAR CENDERUNG TENANG)"
+- Artinya: Pidato The Fed hanya mengulang retorika standar pasar, tidak ada kejutan baru.
+- Yang Harus Anda Klik di MetaTrader (MT4 / MT5):
+  1. Jika harga tiba-tiba melonjak naik/turun sesaat, JANGAN kejar posisi (jangan FOMO),
+     karena lonjakan itu biasanya jebakan (fakeout).
+  2. Tunggu harga kembali tenang ke level semula, baru lakukan trading normal.
+  3. Target profit realistis saja (20 - 40 pips).
+
+========================================================================================
+File ini bisa dibuka kapan saja lewat Notepad sebelum sesi FOMC dimulai.
+========================================================================================
