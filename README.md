@@ -16,10 +16,8 @@
 - [3. Hasil Validasi Statistik Formal](#3-hasil-validasi-statistik-formal)
 - [4. Struktur Direktori](#4-struktur-direktori)
 - [5. Panduan Instalasi](#5-panduan-instalasi)
-- [6. Panduan Menjalankan Program](#6-panduan-menjalankan-program)
+- [6. Panduan Menjalankan Program & Pengambilan Data PDF](#6-panduan-menjalankan-program--pengambilan-data-pdf)
 - [7. SOP Eksekusi Market (MetaTrader 4 / 5 Playbook)](#7-sop-eksekusi-market-metatrader-4--5-playbook)
-- [8. Cara Push ke GitHub](#8-cara-push-ke-github)
-- [9. Lisensi](#9-lisensi)
 
 ---
 
@@ -79,6 +77,7 @@ Pengujian dilakukan secara ketat pada data *out-of-sample* (2025–2026) tanpa b
 ├── UJI_PDF_TERBARU.bat              # Launcher 1-klik untuk Windows
 ├── PANDUAN_TRADING_FOMC.txt         # Ringkasan SOP eksekusi trading
 ├── requirements.txt                 # Daftar dependensi Python
+├── LICENSE                          # Lisensi open-source MIT
 └── README.md                        # Dokumentasi resmi repositori
 ```
 
@@ -115,20 +114,51 @@ Pengujian dilakukan secara ketat pada data *out-of-sample* (2025–2026) tanpa b
 
 ---
 
-## 6. Panduan Menjalankan Program
+## 6. Panduan Menjalankan Program & Pengambilan Data PDF
 
-### Cara 1: Eksekusi 1-Klik (Windows) — *Paling Mudah*
-1. Unduh dokumen PDF rilis FOMC terbaru dari situs Federal Reserve dan letakkan di folder `transcript/`.
-2. **Klik 2 kali** file **`UJI_PDF_TERBARU.bat`**.
-3. Sistem akan otomatis mendeteksi PDF terbaru, membaca ucapan Ketua The Fed, menghitung probabilitas, dan menampilkan rekomendasi sinyal trading di layar dalam 2 detik.
-4. Hasil kalkulasi otomatis tercatat ke dalam file log `riwayat_prediksi.csv`.
+### A. Detail Pengambilan Dokumen PDF FOMC Resmi
+Agar model dapat memprediksi secara akurat, Anda membutuhkan dokumen transkrip resmi The Fed. Berikut adalah panduan waktu rilis dan tautan pengambilannya:
 
-### Cara 2: Menjalankan via Terminal / CLI
+#### 1. Waktu Rilis Dokumen
+* **Pukul 14:00 ET (01:00 / 02:00 WIB)**: The Fed merilis *FOMC Statement* (keputusan suku bunga berupa teks pendek). Pada momen ini, pasar sering bereaksi awal namun volatil semu (*fakeout*).
+* **Pukul 14:30 ET (01:30 / 02:30 WIB)**: **Ketua The Fed (Chair) resmi muncul di podium konferensi pers**. Tepat saat Ketua The Fed mulai berbicara, dokumen teks transkrip / pidato pembuka (*Chair's Opening Remarks*) atau transkrip sesi tanya-jawab dirilis ke publik. **Inilah momen emas pengambilan dokumen PDF.**
+
+#### 2. Tautan Resmi Pengunduhan File PDF
+Dokumen PDF dapat diunduh langsung dari dua kanal resmi Federal Reserve berikut:
+* **Kanal Kalender Rapat FOMC**:  
+  👉 [Federal Reserve FOMC Calendars](https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm)  
+  *(Cari baris tahun dan tanggal rapat FOMC terbaru $\rightarrow$ lihat kolom **Press Conference** $\rightarrow$ klik tautan **PDF** pada bagian **Transcript** atau **Opening Remarks**).*
+* **Kanal Siaran Pers Terkini (*Recent Postings*)**:  
+  👉 [Federal Reserve Recent Postings](https://www.federalreserve.gov/recentpostings.htm)  
+  *(Tepat pada pukul 14:30 ET, siaran dokumen pidato Ketua The Fed akan langsung muncul di baris paling atas halaman ini).*
+
+#### 3. Penempatan File
+* Unduh berkas PDF tersebut (contoh penamaan standar: `FOMCpresconf20260916.pdf`).
+* Letakkan / salin berkas PDF tersebut ke dalam folder:
+  ```text
+  transcript/
+  ```
+
+---
+
+### B. Menjalankan Model
+
+#### Cara 1: Eksekusi 1-Klik (Windows) — *Sangat Cepat & Praktis*
+1. Pastikan file PDF terbaru sudah ada di folder `transcript/`.
+2. **Klik 2 kali (Double-Click)** file **`UJI_PDF_TERBARU.bat`**.
+3. Sistem secara otomatis:
+   * Mengambil file PDF tanggal terbaru di folder `transcript/`.
+   * Mendeteksi figur Ketua The Fed yang berbicara (Jerome Powell atau Kevin Warsh).
+   * Mengekstrak ucapan Ketua The Fed dan menghitung probabilitas volatilitas ekstrem.
+   * Menampilkan sinyal rekomendasi trading di layar dalam tempo ~2 detik.
+   * Mencatat hasil prediksi secara otomatis ke berkas `riwayat_prediksi.csv`.
+
+#### Cara 2: Menjalankan via Terminal / CLI
 ```bash
 python uji_transcript_pdf.py
 ```
 
-### Cara 3: Membuka Notebook Riset Interaktif
+#### Cara 3: Membuka Notebook Riset Interaktif
 ```bash
 jupyter notebook fomc_gold_volatility_model.ipynb
 ```
@@ -160,34 +190,4 @@ Saat konferensi pers FOMC berlangsung, model akan memunculkan salah satu dari du
 
 ---
 
-## 8. Cara Push ke GitHub
-
-Untuk mengunggah seluruh repositori ini ke akun GitHub Anda:
-
-```bash
-# 1. Inisialisasi Git di folder proyek
-git init
-
-# 2. Tambahkan seluruh file ke staging area
-git add .
-
-# 3. Buat commit pertama
-git commit -m "feat: initial commit institutional fomc gold tail volatility nlp framework"
-
-# 4. Ubah nama branch utama menjadi main
-git branch -M main
-
-# 5. Hubungkan ke repositori remote Anda
-git remote add origin https://github.com/PranataGM/fomc-gold-tail-volatility-nlp.git
-
-# 6. Push ke GitHub
-git push -u origin main
-```
-
----
-
-## 9. Lisensi
-Didistribusikan di bawah lisensi MIT. Lihat berkas `LICENSE` untuk informasi lebih lanjut.
-
----
 *Disclaimer: Model ini ditujukan untuk riset kuantitatif dan analisis risiko volatilitas moneter. Trading derivatif seperti Emas (XAU/USD) memiliki risiko kerugian modal yang signifikan. Selalu terapkan manajemen risiko yang ketat.*
