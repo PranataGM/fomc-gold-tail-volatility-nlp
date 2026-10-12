@@ -52,7 +52,14 @@ def extract_chair_speech_from_pdf(pdf_path):
             if is_chair_speaking and len(line_clean) > 0:
                 chair_dialogues.append(line_clean)
 
-    speech_final = " ".join(chair_dialogues)
+    # Robust Fallback: Jika PDF berupa 3 halaman Opening Remarks murni tanpa tag nama per kalimat
+    extracted_text = " ".join(chair_dialogues).strip()
+    if len(extracted_text.split()) < 50:
+        # Gunakan seluruh teks dokumen pembuka
+        speech_final = full_text
+    else:
+        speech_final = extracted_text
+
     return detected_chair, speech_final
 
 
